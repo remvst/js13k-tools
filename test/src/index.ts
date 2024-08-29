@@ -1,5 +1,7 @@
 import { hardcodeConstants } from "../../src/hardcode-constants";
 import { assembleHtml } from "../../src/assemble-html";
+import { makeZip } from "../../src/make-zip";
+import { logFileSize } from "../../src/log-file-size";
 import { promises as fs } from 'fs';
 
 const JS_FILES = [
@@ -28,5 +30,11 @@ const CONSTANTS = {
         js: jsCode,
     });
 
-    console.log(html);
+    await fs.writeFile('build/index.html', html);
+
+    await makeZip({
+        html: 'build/index.html',
+        zip: 'build/game.zip',
+    });
+    await logFileSize('build/game.zip', 13 * 1024);
 })();
