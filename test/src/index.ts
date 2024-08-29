@@ -7,6 +7,7 @@ import { promises as fs } from 'fs';
 import CleanCSS from 'clean-css';
 import * as terser from 'terser';
 import { minify as minifyHTML} from 'html-minifier';
+import { Packer } from 'roadroller';
 
 const JS_FILES = [
     'sample/game.js',
@@ -24,8 +25,6 @@ const CONSTANTS = {
     }
 
     let jsCode = fileContents.join('\n');
-
-    jsCode = hardcodeConstants(jsCode, CONSTANTS);
 
     let debugJs = jsCode;
     debugJs = hardcodeConstants(jsCode, {
@@ -57,6 +56,19 @@ const CONSTANTS = {
         minLength: 2,
     })
     prodJs = (await terser.minify(prodJs)).code!;
+
+    const packer = new (Packer as any)([
+        {
+            data: prodJs,
+            type: 'js',
+            action: 'eval',
+        },
+    ], {
+        // see the Usage for available options.
+    });
+    await packer.optimize();
+    const { firstLine, secondLine } = packer.makeDecoder();
+    prodJs = [firstLine, secondLine].join('\n');
 
     const html = await fs.readFile('sample/index.html', 'utf-8');
     const minifiedHtml = minifyHTML(html, {
