@@ -1,11 +1,22 @@
 import { hardcodeConstants } from "../../src/hardcode-constants";
+import { promises as fs } from 'fs';
 
-let code = `function yolo() {
-    console.log('Constant is', PI);
-}`;
+(async () => {
+    const JS_FILES = [
+        'sample/game.js',
+        'sample/index.js',
+    ];
 
-code = hardcodeConstants(code, {
-    'PI': 3.14,
-})
+    const fileContents: string[] = [];
+    for (const path of JS_FILES) {
+        fileContents.push(await fs.readFile(path, 'utf-8'));
+    }
 
-console.log('YUP!', code);
+    let code = fileContents.join('\n');
+
+    code = hardcodeConstants(code, {
+        'PI': 3.14,
+    })
+
+    console.log(code);
+})();

@@ -1,5 +1,3 @@
-'use strict';
-
 export function hardcodeConstants(
     code: string,
     constants: {[key:string]: string | number | boolean},

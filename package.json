@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "lib/cjs/index.js",
   "exports": {
-      "require": "./lib/cjs/index.js",
-      "import": "./lib/esm/index.js"
+    "require": "./lib/cjs/index.js",
+    "import": "./lib/esm/index.js"
   },
   "scripts": {
     "build": "rm -rf lib && tsc && tsc --project tsconfig.cjs.json",
@@ -15,5 +15,8 @@
   "description": "",
   "dependencies": {
     "typescript": "^5.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.1"
   }
 }
