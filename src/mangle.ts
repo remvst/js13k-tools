@@ -16,7 +16,7 @@ interface WordCountItem {
     count: number;
 }
 
-function split(s: string, start: number = 0): SplitItem[] {
+function split(s: string): SplitItem[] {
     const res: SplitItem[] = [];
     s.split(NOMANGLE_START_TAG).forEach((component, i) => {
         const spl = component.split(NOMANGLE_END_TAG);
@@ -42,8 +42,8 @@ function split(s: string, start: number = 0): SplitItem[] {
 
 function join(components: SplitItem[]): string {
     return components.map((component) => {
-        if (component.mangle) {
-            return module.exports.START_TAG + component.content + module.exports.END_TAG;
+        if (!component.mangle) {
+            return NOMANGLE_START_TAG + component.content + NOMANGLE_END_TAG;
         } else {
             return component.content;
         }
@@ -106,6 +106,8 @@ export function mangle(opts: {
         minLength: opts.minLength,
     });
 
+    console.log(mangledNames);
+
     // Stripping the comments and the strings to avoid detecting inexistent conflicts
     const splitComponents = split(opts.source);
     const inputWithoutStrings = splitComponents
@@ -126,12 +128,12 @@ export function mangle(opts: {
         }
     }
 
+    console.log(mangleMap);
+
     const components = split(opts.source);
     const manglableComponents = components.filter((component) => component.mangle);
 
-    for (let word in mangleMap) {
-        const mangled = mangleMap[word];
-
+    for (const [word, mangled] of mangleMap.entries()) {
         const regex = new RegExp('\\b' + word + '\\b', 'g');
 
         let characterDiff = 0;

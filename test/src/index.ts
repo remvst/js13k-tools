@@ -50,7 +50,12 @@ const CONSTANTS = {
         DEBUG: false,
         ...CONSTANTS,
     });
-    // TODO mangle
+    prodJs = mangle({
+        source: prodJs,
+        force: [],
+        skip: [],
+        minLength: 2,
+    })
     prodJs = (await terser.minify(prodJs)).code!;
 
     const html = await fs.readFile('sample/index.html', 'utf-8');
