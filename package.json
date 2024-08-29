@@ -1,0 +1,19 @@
+{
+  "name": "@remvst/js13k-tools",
+  "version": "1.0.0",
+  "main": "lib/cjs/index.js",
+  "exports": {
+      "require": "./lib/cjs/index.js",
+      "import": "./lib/esm/index.js"
+  },
+  "scripts": {
+    "build": "rm -rf lib && tsc && tsc --project tsconfig.cjs.json",
+    "prepublishOnly": "npm i && npm run build"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "typescript": "^5.5.4"
+  }
+}
