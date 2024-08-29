@@ -1,22 +1,32 @@
 import { hardcodeConstants } from "../../src/hardcode-constants";
+import { assembleHtml } from "../../src/assemble-html";
 import { promises as fs } from 'fs';
 
+const JS_FILES = [
+    'sample/game.js',
+    'sample/index.js',
+];
+
+const CONSTANTS = {
+    'PI': 3.14,
+};
+
 (async () => {
-    const JS_FILES = [
-        'sample/game.js',
-        'sample/index.js',
-    ];
 
     const fileContents: string[] = [];
     for (const path of JS_FILES) {
         fileContents.push(await fs.readFile(path, 'utf-8'));
     }
 
-    let code = fileContents.join('\n');
+    let jsCode = fileContents.join('\n');
 
-    code = hardcodeConstants(code, {
-        'PI': 3.14,
-    })
+    jsCode = hardcodeConstants(jsCode, CONSTANTS);
 
-    console.log(code);
+    const html = assembleHtml({
+        html: await fs.readFile('sample/index.html', 'utf-8'),
+        css: await fs.readFile('sample/style.css', 'utf-8'),
+        js: jsCode,
+    });
+
+    console.log(html);
 })();
