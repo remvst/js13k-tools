@@ -7,7 +7,7 @@ import { promises as fs } from 'fs';
 import CleanCSS from 'clean-css';
 import * as terser from 'terser';
 import { minify as minifyHTML} from 'html-minifier';
-import { Packer } from 'roadroller';
+import { Packer, InputAction, InputType, Input } from 'roadroller';
 
 const JS_FILES = [
     'sample/game.js',
@@ -57,11 +57,11 @@ const CONSTANTS = {
     })
     prodJs = (await terser.minify(prodJs)).code!;
 
-    const packer = new (Packer as any)([
+    const packer = new Packer([
         {
             data: prodJs,
-            type: 'js',
-            action: 'eval',
+            type: 'js' as InputType.JS,
+            action: 'eval' as InputAction.Eval,
         },
     ], {
         // see the Usage for available options.

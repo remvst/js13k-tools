@@ -106,8 +106,6 @@ export function mangle(opts: {
         minLength: opts.minLength,
     });
 
-    console.log(mangledNames);
-
     // Stripping the comments and the strings to avoid detecting inexistent conflicts
     const splitComponents = split(opts.source);
     const inputWithoutStrings = splitComponents
@@ -127,8 +125,6 @@ export function mangle(opts: {
             }
         }
     }
-
-    console.log(mangleMap);
 
     const components = split(opts.source);
     const manglableComponents = components.filter((component) => component.mangle);
