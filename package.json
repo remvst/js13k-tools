@@ -14,11 +14,14 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "escape-string-regexp": "^5.0.0",
     "mustache": "^4.2.0",
+    "strip-comments": "^2.0.1",
     "typescript": "^5.5.4",
     "zip-lib": "^1.0.4"
   },
   "devDependencies": {
-    "@types/node": "^22.5.1"
+    "@types/node": "^22.5.1",
+    "@types/strip-comments": "^2.0.4"
   }
 }

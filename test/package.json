@@ -10,7 +10,14 @@
   "description": "",
   "dependencies": {
     "@remvst/js13k-tools": "file:..",
+    "clean-css": "^5.3.3",
+    "html-minifier": "^4.0.0",
+    "terser": "^5.31.6",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
+  },
+  "devDependencies": {
+    "@types/clean-css": "^4.2.11",
+    "@types/html-minifier": "^4.0.5"
   }
 }
