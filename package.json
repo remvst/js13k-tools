@@ -10,7 +10,7 @@
     "prepublishOnly": "npm i && npm run build"
   },
   "type": "module",
-  "author": "",
+  "author": "Rémi Vansteelandt",
   "license": "ISC",
   "description": "",
   "dependencies": {
