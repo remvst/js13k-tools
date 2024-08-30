@@ -6,7 +6,7 @@ import { mangle } from "@remvst/js13k-tools";
 import { promises as fs } from 'fs';
 import CleanCSS from 'clean-css';
 import * as terser from 'terser';
-import { minify as minifyHTML} from 'html-minifier';
+import { minify as minifyHTML } from 'html-minifier';
 import { Packer, InputAction, InputType } from 'roadroller';
 
 const JS_FILES = [
@@ -19,7 +19,7 @@ const CONSTANTS = {
 };
 
 (async () => {
-    await fs.rm('build/', { recursive: true});
+    await fs.rm('build/', { recursive: true });
 
     const fileContents: string[] = [];
     for (const path of JS_FILES) {
@@ -100,7 +100,7 @@ const CONSTANTS = {
         js: prodJs,
     });
 
-    await fs.mkdir('build/', { recursive: true});
+    await fs.mkdir('build/', { recursive: true });
     await fs.writeFile('build/debug.html', debugHtml);
     await fs.writeFile('build/debug_mangled.html', debugMangledHtml);
     await fs.writeFile('build/index.html', prodHtml);
