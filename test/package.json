@@ -1,15 +1,11 @@
 {
   "name": "@remvst/js13k-tools-test",
-  "version": "1.0.0",
-  "main": "index.js",
   "private": true,
   "scripts": {
-    "test": "npx tsx src/index.ts"
+    "test": "npx tsx src/build.ts"
   },
   "type": "module",
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "author": "Rémi Vansteelandt",
   "dependencies": {
     "@remvst/js13k-tools": "file:../",
     "clean-css": "^5.3.3",
