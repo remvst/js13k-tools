@@ -3,6 +3,7 @@ import { assembleHtml } from "@remvst/js13k-tools";
 import { makeZip } from "@remvst/js13k-tools";
 import { logFileSize } from "@remvst/js13k-tools";
 import { mangle, NOMANGLE } from "@remvst/js13k-tools";
+import { EVALUATE } from "@remvst/js13k-tools";
 import { promises as fs } from 'fs';
 import CleanCSS from 'clean-css';
 import * as terser from 'terser';
@@ -34,6 +35,7 @@ const CONSTANTS = {
         ...CONSTANTS,
     });
     debugJs = macro(debugJs, NOMANGLE);
+    debugJs = macro(debugJs, EVALUATE);
 
     let debugMangledJs = jsCode;
     debugMangledJs = hardcodeConstants(debugMangledJs, {
@@ -41,6 +43,7 @@ const CONSTANTS = {
         ...CONSTANTS,
     });
     debugMangledJs = macro(debugMangledJs, NOMANGLE);
+    debugMangledJs = macro(debugMangledJs, EVALUATE);
     debugMangledJs = mangle({
         source: debugMangledJs,
         force: [],
@@ -54,6 +57,7 @@ const CONSTANTS = {
         ...CONSTANTS,
     });
     prodJs = macro(prodJs, NOMANGLE);
+    prodJs = macro(prodJs, EVALUATE);
     prodJs = mangle({
         source: prodJs,
         force: [],
