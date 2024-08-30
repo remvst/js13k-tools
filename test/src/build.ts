@@ -1,4 +1,4 @@
-import { EVALUATE, NOMANGLE, assembleHtml, hardcodeConstants, logFileSize, macro, makeZip, mangle } from "@remvst/js13k-tools";
+import { EVALUATE, NOMANGLE, assembleHtml, hardcodeConstants, macro, mangle } from "@remvst/js13k-tools";
 import CleanCSS from 'clean-css';
 import { promises as fs } from 'fs';
 import { minify as minifyHTML } from 'html-minifier';
@@ -104,10 +104,4 @@ const CONSTANTS = {
     await fs.writeFile('build/debug.html', debugHtml);
     await fs.writeFile('build/debug_mangled.html', debugMangledHtml);
     await fs.writeFile('build/index.html', prodHtml);
-
-    await makeZip({
-        html: 'build/index.html',
-        zip: 'build/game.zip',
-    });
-    await logFileSize('build/game.zip', 13 * 1024);
 })();
