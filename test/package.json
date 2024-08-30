@@ -2,7 +2,7 @@
   "name": "@remvst/js13k-tools-test",
   "private": true,
   "scripts": {
-    "test": "npx tsx src/build.ts"
+    "test": "tsx src/build.ts"
   },
   "type": "module",
   "author": "Rémi Vansteelandt",
