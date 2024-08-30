@@ -79,7 +79,7 @@ function encodeNumber(num: number): string {
     return res;
 };
 
-function hasMatch(lines, mangled) {
+function hasMatch(lines: string[], mangled: string): boolean {
     const regex = new RegExp('\\b' + escapeStringRegexp(mangled) + '\\b', 'g');
 
     for (var i = 0; i < lines.length; i++) {
@@ -93,8 +93,7 @@ function hasMatch(lines, mangled) {
     return false;
 }
 
-export function mangle(opts: {
-    source: string,
+export function mangle(code: string, opts: {
     force: string[],
     skip: string[],
     minLength: number,
@@ -106,14 +105,13 @@ export function mangle(opts: {
     for (const name of opts.force) protectedNames.delete(name);
 
     // Find common names
-    const mangledNames = analyze({
-        source: opts.source,
+    const mangledNames = analyze(code, {
         protectedNames: protectedNames,
         minLength: opts.minLength,
     });
 
     // Stripping the comments and the strings to avoid detecting inexistent conflicts
-    const splitComponents = split(opts.source);
+    const splitComponents = split(code);
     const inputWithoutStrings = splitComponents
         .map(component => !component.mangle ? '""' : component.content) // if it's not manglable, replace with an empty string
         .join('');
@@ -132,7 +130,7 @@ export function mangle(opts: {
         }
     }
 
-    const components = split(opts.source);
+    const components = split(code);
     const manglableComponents = components.filter((component) => component.mangle);
 
     for (const [word, mangled] of mangleMap.entries()) {
@@ -151,14 +149,13 @@ export function mangle(opts: {
     return join(components);
 }
 
-export function analyze(opts: {
-    source: string,
+export function analyze(code: string, opts: {
     minLength: number,
     protectedNames: Set<string>,
 }) {
     const minLength = opts.minLength || 2;
 
-    const wordList = cleanString(opts.source)
+    const wordList = cleanString(code)
         .split(' ')
         .filter(w => w.length >= minLength && /^[$_a-z]/i.test(w))
         .filter(w => !opts.protectedNames.has(w));

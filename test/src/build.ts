@@ -44,12 +44,11 @@ const CONSTANTS = {
     });
     debugMangledJs = macro(debugMangledJs, NOMANGLE);
     debugMangledJs = macro(debugMangledJs, EVALUATE);
-    debugMangledJs = mangle({
-        source: debugMangledJs,
+    debugMangledJs = mangle(debugMangledJs, {
         force: [],
         skip: [],
         minLength: 2,
-    })
+    });
 
     let prodJs = jsCode;
     prodJs = hardcodeConstants(prodJs, {
@@ -58,8 +57,7 @@ const CONSTANTS = {
     });
     prodJs = macro(prodJs, NOMANGLE);
     prodJs = macro(prodJs, EVALUATE);
-    prodJs = mangle({
-        source: prodJs,
+    prodJs = mangle(prodJs, {
         force: [],
         skip: [],
         minLength: 2,
