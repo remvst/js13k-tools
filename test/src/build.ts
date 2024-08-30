@@ -1,14 +1,9 @@
-import { hardcodeConstants, macro } from "@remvst/js13k-tools";
-import { assembleHtml } from "@remvst/js13k-tools";
-import { makeZip } from "@remvst/js13k-tools";
-import { logFileSize } from "@remvst/js13k-tools";
-import { mangle, NOMANGLE } from "@remvst/js13k-tools";
-import { EVALUATE } from "@remvst/js13k-tools";
-import { promises as fs } from 'fs';
+import { EVALUATE, NOMANGLE, assembleHtml, hardcodeConstants, logFileSize, macro, makeZip, mangle } from "@remvst/js13k-tools";
 import CleanCSS from 'clean-css';
-import * as terser from 'terser';
+import { promises as fs } from 'fs';
 import { minify as minifyHTML } from 'html-minifier';
-import { Packer, InputAction, InputType } from 'roadroller';
+import { InputAction, InputType, Packer } from 'roadroller';
+import * as terser from 'terser';
 
 const JS_FILES = [
     'sample/game.js',
