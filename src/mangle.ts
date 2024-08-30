@@ -2,9 +2,10 @@ import { PROTECTED_NAMES } from './protected-names';
 
 import stripComments from 'strip-comments';
 import escapeStringRegexp from 'escape-string-regexp';
+import { Macro } from './macro';
 
-const NOMANGLE_START_TAG = '/*nomangle*/';
-const NOMANGLE_END_TAG = '/*/nomangle*/';
+export const NOMANGLE_START_TAG = '/*nomangle*/';
+export const NOMANGLE_END_TAG = '/*/nomangle*/';
 
 interface SplitItem {
     content: string;
@@ -15,6 +16,11 @@ interface WordCountItem {
     word: string;
     count: number;
 }
+
+export const NOMANGLE: Macro = {
+    name: 'nomangle',
+    apply: (s) => NOMANGLE_START_TAG + s + NOMANGLE_END_TAG,
+};
 
 function split(s: string): SplitItem[] {
     const res: SplitItem[] = [];

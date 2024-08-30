@@ -1,8 +1,8 @@
-import { hardcodeConstants } from "@remvst/js13k-tools";
+import { hardcodeConstants, macro } from "@remvst/js13k-tools";
 import { assembleHtml } from "@remvst/js13k-tools";
 import { makeZip } from "@remvst/js13k-tools";
 import { logFileSize } from "@remvst/js13k-tools";
-import { mangle } from "@remvst/js13k-tools";
+import { mangle, NOMANGLE } from "@remvst/js13k-tools";
 import { promises as fs } from 'fs';
 import CleanCSS from 'clean-css';
 import * as terser from 'terser';
@@ -29,16 +29,18 @@ const CONSTANTS = {
     let jsCode = fileContents.join('\n');
 
     let debugJs = jsCode;
-    debugJs = hardcodeConstants(jsCode, {
+    debugJs = hardcodeConstants(debugJs, {
         DEBUG: true,
         ...CONSTANTS,
     });
+    debugJs = macro(debugJs, NOMANGLE);
 
     let debugMangledJs = jsCode;
-    debugMangledJs = hardcodeConstants(jsCode, {
+    debugMangledJs = hardcodeConstants(debugMangledJs, {
         DEBUG: true,
         ...CONSTANTS,
     });
+    debugMangledJs = macro(debugMangledJs, NOMANGLE);
     debugMangledJs = mangle({
         source: debugMangledJs,
         force: [],
@@ -47,10 +49,11 @@ const CONSTANTS = {
     })
 
     let prodJs = jsCode;
-    prodJs = hardcodeConstants(jsCode, {
+    prodJs = hardcodeConstants(prodJs, {
         DEBUG: false,
         ...CONSTANTS,
     });
+    prodJs = macro(prodJs, NOMANGLE);
     prodJs = mangle({
         source: prodJs,
         force: [],

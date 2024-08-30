@@ -1,8 +1,8 @@
 onload = () => {
-    console.log('Your constant is', PI);
+    console.log(nomangle('Your constant is'), PI);
 
     if (DEBUG) {
-        console.log('Debug mode enabled')
+        console.log(nomangle('Debug mode enabled'))
     }
 
     new Game();
