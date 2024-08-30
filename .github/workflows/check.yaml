@@ -21,7 +21,9 @@ jobs:
               run: npm run build
             - name: Install test dependencies
               working-directory: ./test
-              run: npm ci
+              run: |
+                npm ci
+                sudo apt-get install -y advancecomp
             - name: Build test
               working-directory: ./test
               run: npm test
