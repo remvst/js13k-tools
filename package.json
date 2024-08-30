@@ -12,7 +12,7 @@
   "type": "module",
   "author": "Rémi Vansteelandt",
   "license": "ISC",
-  "description": "",
+  "description": "Various tools for JS13K builds",
   "dependencies": {
     "escape-string-regexp": "^5.0.0",
     "mustache": "^4.2.0",
