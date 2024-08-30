@@ -96,7 +96,7 @@ function hasMatch(lines: string[], mangled: string): boolean {
 export function mangle(code: string, opts: {
     force: string[],
     skip: string[],
-    minLength: number,
+    minLength?: number,
 }): string {
     const protectedNames = new Set<string>();
     for (const name of PROTECTED_NAMES.keywords) protectedNames.add(name);
@@ -150,7 +150,7 @@ export function mangle(code: string, opts: {
 }
 
 export function analyze(code: string, opts: {
-    minLength: number,
+    minLength?: number,
     protectedNames: Set<string>,
 }) {
     const minLength = opts.minLength || 2;
