@@ -19,7 +19,7 @@ const CONSTANTS = {
 };
 
 (async () => {
-    await fs.rm('build/', { recursive: true });
+    await fs.rm('build/', { force: true, recursive: true });
 
     const fileContents: string[] = [];
     for (const path of JS_FILES) {
