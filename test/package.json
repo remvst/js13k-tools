@@ -10,7 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@remvst/js13k-tools": "file:..",
+    "@remvst/js13k-tools": "file:../",
     "clean-css": "^5.3.3",
     "html-minifier": "^4.0.0",
     "roadroller": "^2.1.0",

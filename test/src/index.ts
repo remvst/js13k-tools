@@ -1,8 +1,8 @@
-import { hardcodeConstants } from "../../src/hardcode-constants";
-import { assembleHtml } from "../../src/assemble-html";
-import { makeZip } from "../../src/make-zip";
-import { logFileSize } from "../../src/log-file-size";
-import { mangle } from "../../src/mangle";
+import { hardcodeConstants } from "@remvst/js13k-tools";
+import { assembleHtml } from "@remvst/js13k-tools";
+import { makeZip } from "@remvst/js13k-tools";
+import { logFileSize } from "@remvst/js13k-tools";
+import { mangle } from "@remvst/js13k-tools";
 import { promises as fs } from 'fs';
 import CleanCSS from 'clean-css';
 import * as terser from 'terser';
